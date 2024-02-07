@@ -13,24 +13,35 @@ import java.util.UUID;
 @Repository
 public class ProductRepository {
     private final List<Product> productData = new ArrayList<>();
-    private final Map<String, Product> productMap = new HashMap<>();
+    private final Map<String, Integer> indexMap = new HashMap<>();
 
     public Product create(Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productData.add(product);
-        productMap.put(product.getProductId(), product);
+        indexMap.put(product.getProductId(), productData.size()-1);
         return product;
     }
 
     public Product get(String productId) {
-        return productMap.get(productId);
+        int productIndex = indexMap.get(productId);
+        return productData.get(productIndex);
     }
 
     // change oldProduct to match newProduct
     public void edit(Product newProduct) {
-        Product oldProduct = productMap.get(newProduct.getProductId());
+        String productId = newProduct.getProductId();
+        int productIndex = indexMap.get(productId);
+        Product oldProduct = productData.get(productIndex);
+
         oldProduct.setProductQuantity(newProduct.getProductQuantity());
         oldProduct.setProductName(newProduct.getProductName());
+    }
+
+    public void delete(Product product) {
+        String productId = product.getProductId();
+        int productIndex = indexMap.get(productId);
+        productData.set(productIndex, null);
+        indexMap.remove(productId);
     }
 
     public Iterator<Product> findAll() {
