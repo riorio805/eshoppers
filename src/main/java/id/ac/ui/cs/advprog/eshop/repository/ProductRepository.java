@@ -45,6 +45,12 @@ public class ProductRepository {
     }
 
     public Iterator<Product> findAll() {
-        return productData.iterator();
+        List<Product> allProduct = new ArrayList<>();
+        productData.forEach(
+            e -> {
+                if (e != null) allProduct.add(e);
+            }
+        );
+        return allProduct.iterator();
     }
 }
