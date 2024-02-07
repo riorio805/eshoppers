@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Iterator;
 
@@ -77,7 +76,7 @@ public class ProductRepositoryTest {
 
         product.setProductName("Sampo Cap Usep");
         product.setProductQuantity(321);
-        productRepository.edit(product);
+        productRepository.update(product);
 
         Iterator<Product> productIterator = productRepository.findAll();
         Product savedProduct = productIterator.next();

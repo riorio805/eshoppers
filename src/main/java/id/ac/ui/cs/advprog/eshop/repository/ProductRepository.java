@@ -27,8 +27,7 @@ public class ProductRepository {
         return productData.get(productIndex);
     }
 
-    // change oldProduct to match newProduct
-    public void edit(Product newProduct) {
+    public void update(Product newProduct) {
         String productId = newProduct.getProductId();
         int productIndex = indexMap.get(productId);
         Product oldProduct = productData.get(productIndex);

@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void edit(Product newProduct) {
-        productRepository.edit(newProduct);
+    public void update(Product newProduct) {
+        productRepository.update(newProduct);
     }
 
     @Override
