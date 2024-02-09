@@ -64,6 +64,27 @@ public class ProductRepositoryTest {
     }
 
     @Test
+    void testGetProduct() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        // unused
+        Product product2 = new Product();
+        product2.setProductId("random-uuid-for-an-item");
+        product2.setProductName("Sampo Cap Usep");
+        product2.setProductQuantity(50);
+        productRepository.create(product2);
+
+        Product savedProduct = productRepository.get("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        assertEquals("eb558e9f-1c39-460e-8860-71af6af63bd6", savedProduct.getProductId());
+        assertEquals("Sampo Cap Bambang", savedProduct.getProductName());
+        assertEquals(100, savedProduct.getProductQuantity());
+    }
+
+    @Test
     void testEdit() {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
