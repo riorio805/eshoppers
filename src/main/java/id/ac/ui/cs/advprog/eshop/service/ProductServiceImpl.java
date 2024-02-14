@@ -40,11 +40,7 @@ public class ProductServiceImpl implements ProductService{
         Iterator<Product> productIterator = productRepository.findAll();
         List<Product> allProduct = new ArrayList<>();
         // remove nulls from list
-        productIterator.forEachRemaining(
-            e -> {
-                if (e != null) { allProduct.add(e); }
-            }
-        );
+        productIterator.forEachRemaining(allProduct::add);
         return allProduct;
     }
 }
