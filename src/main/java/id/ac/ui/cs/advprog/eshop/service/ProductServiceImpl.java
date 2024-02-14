@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService{
         // remove nulls from list
         productIterator.forEachRemaining(
             e -> {
-                if (e != null) allProduct.add(e);
+                if (e != null) { allProduct.add(e); }
             }
         );
         return allProduct;

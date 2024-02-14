@@ -16,8 +16,9 @@ public class ProductRepository {
     private final Map<String, Integer> indexMap = new HashMap<>();
 
     public Product create(Product product) {
-        if (product.getProductId() == null)
+        if (product.getProductId() == null) {
             product.setProductId(UUID.randomUUID().toString());
+        }
         productData.add(product);
         indexMap.put(product.getProductId(), productData.size()-1);
         return product;
@@ -48,7 +49,7 @@ public class ProductRepository {
         List<Product> allProduct = new ArrayList<>();
         productData.forEach(
             e -> {
-                if (e != null) allProduct.add(e);
+                if (e != null) { allProduct.add(e); }
             }
         );
         return allProduct.iterator();
