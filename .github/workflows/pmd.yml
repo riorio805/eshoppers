@@ -20,6 +20,7 @@ jobs:
           version: "7.0.0-rc4"
           sourcePath: "src/main"
           rulesets: 'rulesets/java/quickstart.xml'
+          analyzeModifiedFilesOnly: false
       - name: "Upload SARIF file"
         uses: github/codeql-action/upload-sarif@v1
         with:
