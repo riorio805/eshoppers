@@ -15,6 +15,6 @@ public class MainPageController {
 
     @GetMapping("")
     public String mainPage(Model model) {
-        return "welcomePage";
+        return "WelcomePage";
     }
 }
