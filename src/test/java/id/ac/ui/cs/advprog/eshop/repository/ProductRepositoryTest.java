@@ -34,6 +34,19 @@ public class ProductRepositoryTest {
         assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
     }
 
+    // should auto-generate a UUID if not provided
+    @Test
+    void testCreateWithoutUUID() {
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        Product savedProduct = productIterator.next();
+        assertNotNull(savedProduct.getProductId());
+    }
+
     @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
