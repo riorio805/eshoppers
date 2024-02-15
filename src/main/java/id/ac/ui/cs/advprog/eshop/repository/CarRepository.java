@@ -44,7 +44,7 @@ public class CarRepository {
         }
         return null;
     }
-    public void delete(String id) {
+    public void deleteCarById(String id) {
         carData.removeIf(car -> car.getCarId().equals(id));
     }
 }
