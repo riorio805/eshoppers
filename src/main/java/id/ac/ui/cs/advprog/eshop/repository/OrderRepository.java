@@ -32,7 +32,7 @@ public class OrderRepository {
         return null;
     }
 
-    public List<Order> findByAuthor(String author) {
+    public List<Order> findAllByAuthor(String author) {
         List<Order> result = new ArrayList<>();
         orderData.forEach(order -> {
             if (order.getAuthor().equals(author))
