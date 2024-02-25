@@ -8,17 +8,37 @@ import java.util.List;
 
 @Repository
 public class OrderRepository {
-    private final List<Order> orderList = new ArrayList<>();
+    private final List<Order> orderData = new ArrayList<>();
 
     public Order save(Order order) {
-        return null;
+        for (int i = 0; i < orderData.size(); i++) {
+            Order savedOrder = orderData.get(i);
+            if (savedOrder.getId().equals(order.getId())) {
+                orderData.remove(i);
+                orderData.add(i, order);
+                return order;
+            }
+        }
+        orderData.add(order);
+        return order;
     }
 
     public Order findById(String id) {
+        for (Order savedOrder: orderData) {
+            if (savedOrder.getId().equals(id)) {
+                return savedOrder;
+            }
+        }
         return null;
     }
 
     public List<Order> findByAuthor(String author) {
-        return null;
+        List<Order> result = new ArrayList<>();
+        orderData.forEach(order -> {
+            if (order.getAuthor().equals(author))
+                result.add(order);
+        });
+
+        return result;
     }
 }
