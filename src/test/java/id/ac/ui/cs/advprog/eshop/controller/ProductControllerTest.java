@@ -36,7 +36,7 @@ public class ProductControllerTest {
 
         this.testProduct2 = new Product();
         this.testProduct2.setProductId("602c3686-9b97-45b4-9349-f8450a6f1d46");
-        this.testProduct2.setProductName("STout Dobi's pre-built PC");
+        this.testProduct2.setProductName("STelle Dobi's pre-built PC");
         this.testProduct2.setProductQuantity(10);
     }
 
