@@ -41,7 +41,8 @@ public class OrderServiceImplTest {
         Order order1 = new Order("13652556-012a-4c07-b546-54eb1396d79b",
                 products, 1708560000L, "Safira Sudrajat");
         orders.add(order1);
-        Order order2 = new Order("ca8badb9-b79c-a26f-c08b-e865772166d2",
+        // hmm mm
+        Order order2 = new Order("ca8badb9-b79c-a26f-d5d2-4c353865472d",
                 products, 1708570000L, "Safira Sudrajat");
         orders.add(order2);
     }
@@ -57,7 +58,7 @@ public class OrderServiceImplTest {
     }
 
     @Test
-    void testCreateOrderIfAlreadyExists() {
+    void testCreateOrderIcAlreadyExists() {
         Order order = orders.get(1);
         doReturn(order).when(orderRepository).findById(order.getId());
 
