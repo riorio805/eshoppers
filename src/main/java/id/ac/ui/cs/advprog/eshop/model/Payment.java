@@ -1,8 +1,10 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
-import java.util.List;
+import lombok.Getter;
+
 import java.util.Map;
 
+@Getter
 public class Payment {
     String id;
     String method;
@@ -20,10 +22,5 @@ public class Payment {
 
     public void setStatus(String status) {
         // empty skeleton
-    }
-
-    public Order getOrder() {
-        // empty skeleton
-        return null;
     }
 }
