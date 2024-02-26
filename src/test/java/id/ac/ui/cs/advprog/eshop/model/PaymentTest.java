@@ -158,4 +158,63 @@ public class PaymentTest {
                     "VOUCHER_CODE", order, paymentData2);
         });
     }
+
+    @Test
+    void testBankTransferValid() {
+        Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
+                this.products, 1708690000L, "Dek Depe");
+
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("bankName", "STM Bank");
+        paymentData.put("referenceCode", "82un3rc0");
+
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "BANK_TRANSFER", order, paymentData);
+    }
+
+    @Test
+    void testBankTransferInvalidBankName() {
+        Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
+                this.products, 1708690000L, "Dek Depe");
+
+        Map<String, String> paymentData1 = new HashMap<>();
+        paymentData1.put("bankName", "");
+        paymentData1.put("referenceCode", "e80fuv32");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "BANK_TRANSFER", order, paymentData1);
+        });
+
+        Map<String, String> paymentData2 = new HashMap<>();
+        paymentData2.put("bankName", null);
+        paymentData2.put("referenceCode", "vhf2308s");
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                    "BANK_TRANSFER", order, paymentData2);
+        });
+    }
+
+    @Test
+    void testBankTransferInvalidRefCode() {
+        Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
+                this.products, 1708690000L, "Dek Depe");
+
+        Map<String, String> paymentData1 = new HashMap<>();
+        paymentData1.put("bankName", "Bank Mandiri");
+        paymentData1.put("referenceCode", "");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                    "BANK_TRANSFER", order, paymentData1);
+        });
+
+        Map<String, String> paymentData2 = new HashMap<>();
+        paymentData2.put("bankName", "Bank Pak Esdea");
+        paymentData2.put("referenceCode", null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                    "BANK_TRANSFER", order, paymentData2);
+        });
+    }
 }
