@@ -6,18 +6,24 @@ import java.util.Map;
 public class Payment {
     String id;
     String method;
-    String status;
+    Order order;
     Map<String, String> paymentData;
+    String status;
 
-    public Payment(String id, String method, Map<String, String> paymentData) {
+    public Payment(String id, String method, Order order, Map<String, String> paymentData) {
         // empty skeleton
     }
 
-    public Payment(String id, String method, Map<String, String> paymentData, String status) {
+    public Payment(String id, String method, Order order, Map<String, String> paymentData, String status) {
         // empty skeleton
     }
 
     public void setStatus(String status) {
         // empty skeleton
+    }
+
+    public Order getOrder() {
+        // empty skeleton
+        return null;
     }
 }
