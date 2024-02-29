@@ -24,20 +24,26 @@ public class Payment {
         this.method = method;
 
         if (! order.getStatus().equals(OrderStatus.WAITING_PAYMENT.getValue()) ) {
-            throw new IllegalArgumentException("Invalid order");
+            this.status = "REJECTED";
         }
         this.order = order;
-
         this.paymentData = paymentData;
-        if (method.equals("VOUCHER_CODE")) {
+
+        if (status == null) {
+            updateStatus();
+        }
+    }
+
+    private void updateStatus() {
+        if (this.method.equals("VOUCHER_CODE")) {
             if (! this.paymentData.containsKey("voucherCode")) {
                 throw new IllegalArgumentException("Invalid payment data for current method");
             }
             this.status = verifyVoucherCode();
         }
-        else if (method.equals("BANK_TRANSFER")) {
+        else if (this.method.equals("BANK_TRANSFER")) {
             if (! this.paymentData.containsKey("bankName") ||
-                ! this.paymentData.containsKey("referenceCode")) {
+                    ! this.paymentData.containsKey("referenceCode")) {
                 throw new IllegalArgumentException("Invalid payment data for current method");
             }
             this.status = verifyBankTransfer();
