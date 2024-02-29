@@ -181,7 +181,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", "e80fuv32");
 
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                "VOUCHER_CODE", order, paymentData);
+                "BANK_TRANSFER", order, paymentData);
         assertEquals("REJECTED", payment.getStatus());
 
         paymentData = new HashMap<>();
@@ -189,7 +189,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", "vhf2308s");
 
         payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                "VOUCHER_CODE", order, paymentData);
+                "BANK_TRANSFER", order, paymentData);
         assertEquals("REJECTED", payment.getStatus());
     }
 
@@ -200,7 +200,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", "");
 
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                "VOUCHER_CODE", order, paymentData);
+                "BANK_TRANSFER", order, paymentData);
         assertEquals("REJECTED", payment.getStatus());
 
         paymentData = new HashMap<>();
@@ -208,7 +208,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", null);
 
         payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                "VOUCHER_CODE", order, paymentData);
+                "BANK_TRANSFER", order, paymentData);
         assertEquals("REJECTED", payment.getStatus());
     }
 }
