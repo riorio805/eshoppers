@@ -126,7 +126,7 @@ public class PaymentTest {
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
             "VOUCHER_CODE", order, paymentData);
 
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
@@ -140,7 +140,7 @@ public class PaymentTest {
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "VOUCHER_CODE", order, paymentData);
 
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
@@ -153,7 +153,7 @@ public class PaymentTest {
 
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "VOUCHER_CODE", order, paymentData);
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
 
 
         paymentData = new HashMap<>();
@@ -161,7 +161,7 @@ public class PaymentTest {
 
         payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "VOUCHER_CODE", order, paymentData);
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
@@ -193,7 +193,7 @@ public class PaymentTest {
 
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "VOUCHER_CODE", order, paymentData);
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
 
         paymentData = new HashMap<>();
         paymentData.put("bankName", null);
@@ -201,7 +201,7 @@ public class PaymentTest {
 
         payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "VOUCHER_CODE", order, paymentData);
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
@@ -215,7 +215,7 @@ public class PaymentTest {
 
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "VOUCHER_CODE", order, paymentData);
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
 
         paymentData = new HashMap<>();
         paymentData.put("bankName", "Bank Pak Esdea");
@@ -223,6 +223,6 @@ public class PaymentTest {
 
         payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "VOUCHER_CODE", order, paymentData);
-        assertEquals("FAILED", payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
     }
 }
