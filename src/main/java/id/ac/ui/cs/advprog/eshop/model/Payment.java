@@ -19,21 +19,28 @@ public class Payment {
 
         String[] methodList = {"VOUCHER_CODE", "BANK_TRANSFER"};
         if (Arrays.stream(methodList).noneMatch(item -> item.equals(method))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid method");
         }
         this.method = method;
 
         if (! order.getStatus().equals(OrderStatus.WAITING_PAYMENT.getValue()) ) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid order");
         }
         this.order = order;
 
         this.paymentData = paymentData;
         if (method.equals("VOUCHER_CODE")) {
             if (! this.paymentData.containsKey("voucherCode")) {
-                throw new IllegalArgumentException("No voucher code");
+                throw new IllegalArgumentException("Invalid payment data for current method");
             }
             this.status = verifyVoucherCode();
+        }
+        else if (method.equals("BANK_TRANSFER")) {
+            if (! this.paymentData.containsKey("bankName") ||
+                ! this.paymentData.containsKey("referenceCode")) {
+                throw new IllegalArgumentException("Invalid payment data for current method");
+            }
+            this.status = verifyBankTransfer();
         }
     }
 
@@ -58,5 +65,20 @@ public class Payment {
         }
 
         return "SUCCESS";
+    }
+
+    private String verifyBankTransfer() {
+        String bankName = this.paymentData.get("bankName");
+        String referenceCode = this.paymentData.get("referenceCode");
+
+        if (bankName == null || bankName.isEmpty()) {
+            return "REJECTED";
+        }
+
+        if (referenceCode == null || referenceCode.isEmpty()) {
+            return "REJECTED";
+        }
+
+        return "WAITING";
     }
 }
