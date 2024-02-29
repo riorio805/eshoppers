@@ -23,11 +23,40 @@ public class Payment {
         }
         this.method = method;
 
-        if (!order.getStatus().equals(OrderStatus.WAITING_PAYMENT.getValue())) {
+        if (! order.getStatus().equals(OrderStatus.WAITING_PAYMENT.getValue()) ) {
             throw new IllegalArgumentException();
         }
         this.order = order;
 
         this.paymentData = paymentData;
+        if (method.equals("VOUCHER_CODE")) {
+            if (! this.paymentData.containsKey("voucherCode")) {
+                throw new IllegalArgumentException("No voucher code");
+            }
+            this.status = verifyVoucherCode();
+        }
+    }
+
+    private String verifyVoucherCode() {
+        String voucherCode = this.paymentData.get("voucherCode");
+        if (voucherCode.length() != 16) {
+            return "REJECTED";
+        }
+
+        if (! voucherCode.startsWith("ESHOP")) {
+            return "REJECTED";
+        }
+
+        int numCount = 0;
+        for (char character: voucherCode.toCharArray()) {
+            if (Character.isDigit(character)) {
+                numCount += 1;
+            }
+        }
+        if (numCount != 8) {
+            return "REJECTED";
+        }
+
+        return "SUCCESS";
     }
 }
