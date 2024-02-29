@@ -92,6 +92,21 @@ public class PaymentTest {
     }
 
     @Test
+    void testPaymentEmptyData() {
+        Map<String, String> paymentData = new HashMap<>();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+            "VOUCHER_CODE", order, paymentData);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+            "BANK_TRANSFER", order, paymentData);
+        });
+    }
+
+    @Test
     void testValidVoucherCode() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
@@ -100,16 +115,6 @@ public class PaymentTest {
             "VOUCHER_CODE", order, paymentData);
 
         assertEquals("SUCCESS", payment.getStatus());
-    }
-
-    @Test
-    void testVoucherCodeEmptyData() {
-        Map<String, String> paymentData = new HashMap<>();
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                "VOUCHER_CODE", order, paymentData);
-        });
     }
 
     @Test
