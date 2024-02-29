@@ -112,6 +112,7 @@ public class PaymentTest {
         assertEquals("21a11451-cc2c-4033-bd88-48fbb04032e7", payment.getId());
         assertEquals(order, payment.getOrder());
         assertEquals(paymentData, payment.getPaymentData());
+        assertEquals("SUCCESS", payment.getStatus());
     }
 
     @Test
@@ -122,10 +123,10 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP26022024");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                "VOUCHER_CODE", order, paymentData);
-        });
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+            "VOUCHER_CODE", order, paymentData);
+
+        assertEquals("FAILED", payment.getStatus());
     }
 
     @Test
@@ -136,10 +137,10 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "PHOSE1234ABC5678");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                    "VOUCHER_CODE", order, paymentData);
-        });
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "VOUCHER_CODE", order, paymentData);
+
+        assertEquals("FAILED", payment.getStatus());
     }
 
     @Test
@@ -147,21 +148,20 @@ public class PaymentTest {
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
                 this.products, 1708690000L, "Dek Depe");
 
-        Map<String, String> paymentData1 = new HashMap<>();
-        paymentData1.put("voucherCode", "PHOSE1234ABC567P");
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "PHOSE1234ABC567P");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                    "VOUCHER_CODE", order, paymentData1);
-        });
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "VOUCHER_CODE", order, paymentData);
+        assertEquals("FAILED", payment.getStatus());
 
-        Map<String, String> paymentData2 = new HashMap<>();
-        paymentData2.put("voucherCode", "PHOSE1234AB56789");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                    "VOUCHER_CODE", order, paymentData2);
-        });
+        paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "PHOSE1234AB56789");
+
+        payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "VOUCHER_CODE", order, paymentData);
+        assertEquals("FAILED", payment.getStatus());
     }
 
     @Test
@@ -179,6 +179,7 @@ public class PaymentTest {
         assertEquals("21a11451-cc2c-4033-bd88-48fbb04032e7", payment.getId());
         assertEquals(order, payment.getOrder());
         assertEquals(paymentData, payment.getPaymentData());
+        assertEquals("SUCCESS", payment.getStatus());
     }
 
     @Test
@@ -186,22 +187,21 @@ public class PaymentTest {
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
                 this.products, 1708690000L, "Dek Depe");
 
-        Map<String, String> paymentData1 = new HashMap<>();
-        paymentData1.put("bankName", "");
-        paymentData1.put("referenceCode", "e80fuv32");
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("bankName", "");
+        paymentData.put("referenceCode", "e80fuv32");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                "BANK_TRANSFER", order, paymentData1);
-        });
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "VOUCHER_CODE", order, paymentData);
+        assertEquals("FAILED", payment.getStatus());
 
-        Map<String, String> paymentData2 = new HashMap<>();
-        paymentData2.put("bankName", null);
-        paymentData2.put("referenceCode", "vhf2308s");
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                    "BANK_TRANSFER", order, paymentData2);
-        });
+        paymentData = new HashMap<>();
+        paymentData.put("bankName", null);
+        paymentData.put("referenceCode", "vhf2308s");
+
+        payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "VOUCHER_CODE", order, paymentData);
+        assertEquals("FAILED", payment.getStatus());
     }
 
     @Test
@@ -209,21 +209,20 @@ public class PaymentTest {
         Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
                 this.products, 1708690000L, "Dek Depe");
 
-        Map<String, String> paymentData1 = new HashMap<>();
-        paymentData1.put("bankName", "Bank Mandiri");
-        paymentData1.put("referenceCode", "");
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("bankName", "Bank Mandiri");
+        paymentData.put("referenceCode", "");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                    "BANK_TRANSFER", order, paymentData1);
-        });
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "VOUCHER_CODE", order, paymentData);
+        assertEquals("FAILED", payment.getStatus());
 
-        Map<String, String> paymentData2 = new HashMap<>();
-        paymentData2.put("bankName", "Bank Pak Esdea");
-        paymentData2.put("referenceCode", null);
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-                    "BANK_TRANSFER", order, paymentData2);
-        });
+        paymentData = new HashMap<>();
+        paymentData.put("bankName", "Bank Pak Esdea");
+        paymentData.put("referenceCode", null);
+
+        payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                "VOUCHER_CODE", order, paymentData);
+        assertEquals("FAILED", payment.getStatus());
     }
 }
