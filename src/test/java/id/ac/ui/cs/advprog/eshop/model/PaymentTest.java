@@ -171,7 +171,7 @@ public class PaymentTest {
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "BANK_TRANSFER", order, paymentData);
 
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals("WAITING", payment.getStatus());
     }
 
     @Test
