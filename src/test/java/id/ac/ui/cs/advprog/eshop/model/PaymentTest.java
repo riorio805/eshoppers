@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PaymentTest {
     private List<Product> products;
@@ -107,6 +108,10 @@ public class PaymentTest {
 
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
             "VOUCHER_CODE", order, paymentData);
+
+        assertEquals("21a11451-cc2c-4033-bd88-48fbb04032e7", payment.getId());
+        assertEquals(order, payment.getOrder());
+        assertEquals(paymentData, payment.getPaymentData());
     }
 
     @Test
@@ -170,6 +175,10 @@ public class PaymentTest {
 
         Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "BANK_TRANSFER", order, paymentData);
+
+        assertEquals("21a11451-cc2c-4033-bd88-48fbb04032e7", payment.getId());
+        assertEquals(order, payment.getOrder());
+        assertEquals(paymentData, payment.getPaymentData());
     }
 
     @Test
