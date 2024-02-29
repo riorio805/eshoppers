@@ -54,7 +54,7 @@ public class PaymentTest {
 
         assertEquals("21a11451-cc2c-4033-bd88-48fbb04032e7", payment.getId());
         assertSame(paymentData, payment.getPaymentData());
-        assertEquals("VOUCHER_CODE", payment.getStatus());
+        assertEquals("VOUCHER_CODE", payment.getMethod());
     }
 
     @Test
