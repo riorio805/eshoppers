@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PaymentTest {
     private List<Product> products;
@@ -88,7 +87,7 @@ public class PaymentTest {
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+            new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
                 "MEONG", order, paymentData);
         });
     }
@@ -98,13 +97,13 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-            PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
+            new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-            PaymentMethod.BANK_TRANSFER.getValue(), order, paymentData);
+            new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                PaymentMethod.BANK_TRANSFER.getValue(), order, paymentData);
         });
     }
 

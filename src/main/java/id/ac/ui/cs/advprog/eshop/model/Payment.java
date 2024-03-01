@@ -86,6 +86,6 @@ public class Payment {
             return PaymentStatus.REJECTED.getValue();
         }
 
-        return PaymentStatus.SUCCESS.getValue();
+        return PaymentStatus.WAITING.getValue();
     }
 }
