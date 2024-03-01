@@ -103,7 +103,7 @@ public class PaymentTest {
     }
 
     @Test
-    void testUpdateStatusWithString() {
+    void testValidUpdateStatusWithString() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
 
@@ -121,7 +121,7 @@ public class PaymentTest {
     }
 
     @Test
-    void testUpdateStatusWithEnum() {
+    void testValidUpdateStatusWithEnum() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
 
@@ -136,6 +136,19 @@ public class PaymentTest {
 
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(), payment.getOrder().getStatus());
+    }
+
+    @Test
+    void testInvalidUpdateStatus() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
+
+        assertThrows(IllegalArgumentException.class, () ->
+                payment.updateStatus("MEONG")
+        );
     }
 
     @Test
