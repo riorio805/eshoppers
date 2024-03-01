@@ -18,7 +18,11 @@ public class PaymentRepository {
         return null;
     }
 
-    public Payment setStatus(String paymentId, String status) {
+    public Payment setStatus(Payment payment, String status) {
+        return null;
+    }
+
+    public Payment setStatusWithId(String paymentId, String status) {
         return null;
     }
 
