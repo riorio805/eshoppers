@@ -31,11 +31,18 @@ public class Payment {
         this.paymentData = paymentData;
 
         if (status == null) {
-            updateStatus();
+            updateStatusFromMethod();
         }
     }
 
-    private void updateStatus() {
+    public void updateStatus(String status) {
+        this.status = status;
+    }
+    public void updateStatus(PaymentStatus status) {
+        this.status = status.getValue();
+    }
+
+    private void updateStatusFromMethod() {
         if (this.method.equals(PaymentMethod.VOUCHER_CODE.getValue())) {
             if (! this.paymentData.containsKey("voucherCode")) {
                 throw new IllegalArgumentException("Invalid payment data for current method");
