@@ -25,7 +25,7 @@ public class Payment {
         this.method = method;
 
         if (! order.getStatus().equals(OrderStatus.WAITING_PAYMENT.getValue()) ) {
-            this.status = PaymentStatus.REJECTED.getValue();
+            this.status = PaymentStatus.FAILED.getValue();
         }
         this.order = order;
         this.paymentData = paymentData;

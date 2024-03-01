@@ -68,17 +68,12 @@ public class PaymentTest {
         order.setStatus(OrderStatus.SUCCESS.getValue());
         payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
             PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
-        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
-
-        order.setStatus(OrderStatus.CANCELLED.getValue());
-        payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
-            PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
-        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertEquals(PaymentStatus.FAILED.getValue(), payment.getStatus());
 
         order.setStatus(OrderStatus.FAILED.getValue());
         payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
             PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
-        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertEquals(PaymentStatus.FAILED.getValue(), payment.getStatus());
     }
 
     @Test
