@@ -108,7 +108,7 @@ public class PaymentRepositoryTest {
     }
 
     @Test
-    void testSetStatusSuccessUsingPayment() {
+    void testSetStatusSuccess() {
         for (Payment payment: payments) {
             paymentRepository.addPayment(payment);
         }
@@ -120,36 +120,12 @@ public class PaymentRepositoryTest {
     }
 
     @Test
-    void testSetStatusRejectedUsingPayment() {
+    void testSetStatusRejected() {
         for (Payment payment: payments) {
             paymentRepository.addPayment(payment);
         }
         Payment payment = paymentRepository.findById(payments.getFirst().getId());
         Payment setResult = paymentRepository.setStatus(payment, PaymentStatus.REJECTED.getValue());
-
-        assertEquals(PaymentStatus.REJECTED.getValue(),setResult.getStatus());
-        assertEquals(OrderStatus.FAILED.getValue(),setResult.getOrder().getStatus());
-    }
-
-    @Test
-    void testSetStatusSuccessWithPaymentId() {
-        for (Payment payment: payments) {
-            paymentRepository.addPayment(payment);
-        }
-        Payment setResult = paymentRepository.setStatusWithId(
-                payments.getFirst().getId(), PaymentStatus.SUCCESS.getValue());
-
-        assertEquals(PaymentStatus.SUCCESS.getValue(),setResult.getStatus());
-        assertEquals(OrderStatus.SUCCESS.getValue(),setResult.getOrder().getStatus());
-    }
-
-    @Test
-    void testSetStatusFailedWithPaymentId() {
-        for (Payment payment: payments) {
-            paymentRepository.addPayment(payment);
-        }
-        Payment setResult = paymentRepository.setStatusWithId(
-                payments.getFirst().getId(), PaymentStatus.REJECTED.getValue());
 
         assertEquals(PaymentStatus.REJECTED.getValue(),setResult.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(),setResult.getOrder().getStatus());
