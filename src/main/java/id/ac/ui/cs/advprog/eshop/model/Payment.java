@@ -36,10 +36,21 @@ public class Payment {
     }
 
     public void updateStatus(String status) {
+        if (! PaymentStatus.contains(status)) {
+            throw new IllegalArgumentException("Invalid status");
+        }
         this.status = status;
+
+        if (this.status.equals(PaymentStatus.SUCCESS.getValue())) {
+            this.getOrder().setStatus(OrderStatus.SUCCESS.getValue());
+        }
+        else if (this.status.equals(PaymentStatus.REJECTED.getValue())) {
+            this.getOrder().setStatus(OrderStatus.FAILED.getValue());
+        }
     }
+
     public void updateStatus(PaymentStatus status) {
-        this.status = status.getValue();
+        updateStatus(status.getValue());
     }
 
     private void updateStatusFromMethod() {
