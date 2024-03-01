@@ -42,4 +42,15 @@ public class Order {
             throw new IllegalArgumentException("Invalid status");
         }
     }
+
+    public Order updateOrder(Order order) {
+        assert this.getId().equals(order.getId());
+
+        this.products = order.getProducts();
+        this.orderTime = order.getOrderTime();
+        this.author = order.getAuthor();
+        this.setStatus(order.getStatus());
+
+        return this;
+    }
 }

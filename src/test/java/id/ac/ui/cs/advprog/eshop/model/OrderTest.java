@@ -81,4 +81,18 @@ class OrderTest {
                 this.products, 1708560000L, "Safira Sudrajat");
         assertThrows(IllegalArgumentException.class, () -> order.setStatus("MEOW"));
     }
+
+    @Test
+    void testUpdateOrder() {
+        Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
+            this.products, 1708560000L, "Safira Sudrajat");
+        Order newOrder = new Order(order.getId(), order.getProducts(), order.getOrderTime(),
+                order.getAuthor(), OrderStatus.SUCCESS.getValue());
+        order.updateOrder(newOrder);
+
+        assertEquals(order.getId(), newOrder.getId());
+        assertEquals(order.getOrderTime(), newOrder.getOrderTime());
+        assertEquals(order.getAuthor(), newOrder.getAuthor());
+        assertEquals(OrderStatus.SUCCESS.getValue(), newOrder.getStatus());
+    }
 }
