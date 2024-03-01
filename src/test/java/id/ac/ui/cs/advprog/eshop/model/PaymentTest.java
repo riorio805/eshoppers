@@ -103,6 +103,30 @@ public class PaymentTest {
     }
 
     @Test
+    void testUpdateStatusWithString() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+            PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
+        payment.updateStatus(PaymentStatus.SUCCESS.getValue());
+
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+    }
+
+    @Test
+    void testUpdateStatusWithEnum() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("21a11451-cc2c-4033-bd88-48fbb04032e7",
+                PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
+        payment.updateStatus(PaymentStatus.SUCCESS);
+
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+    }
+
+    @Test
     void testValidVoucherCode() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
