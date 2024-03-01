@@ -112,6 +112,7 @@ public class PaymentTest {
         payment.updateStatus(PaymentStatus.SUCCESS.getValue());
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.SUCCESS.getValue(), payment.getOrder().getStatus());
     }
 
     @Test
@@ -124,6 +125,7 @@ public class PaymentTest {
         payment.updateStatus(PaymentStatus.SUCCESS);
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.SUCCESS.getValue(), payment.getOrder().getStatus());
     }
 
     @Test
