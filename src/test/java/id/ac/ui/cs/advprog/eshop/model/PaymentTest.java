@@ -113,6 +113,11 @@ public class PaymentTest {
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         assertEquals(OrderStatus.SUCCESS.getValue(), payment.getOrder().getStatus());
+
+        payment.updateStatus(PaymentStatus.REJECTED);
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.FAILED.getValue(), payment.getOrder().getStatus());
     }
 
     @Test
@@ -142,12 +147,6 @@ public class PaymentTest {
             PaymentMethod.VOUCHER_CODE.getValue(), order, paymentData);
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
-        assertEquals(OrderStatus.SUCCESS.getValue(), payment.getOrder().getStatus());
-
-        payment.updateStatus(PaymentStatus.REJECTED);
-
-        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
-        assertEquals(OrderStatus.FAILED.getValue(), payment.getOrder().getStatus());
     }
 
     @Test
