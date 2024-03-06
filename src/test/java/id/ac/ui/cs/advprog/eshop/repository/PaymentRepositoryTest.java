@@ -130,4 +130,16 @@ public class PaymentRepositoryTest {
         assertEquals(PaymentStatus.REJECTED.getValue(),setResult.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(),setResult.getOrder().getStatus());
     }
+
+    @Test
+    void testSetStatusInvalid() {
+        for (Payment payment: payments) {
+            paymentRepository.addPayment(payment);
+        }
+        Payment payment = paymentRepository.findById(payments.getFirst().getId());
+
+        assertThrows(IllegalArgumentException.class, () ->
+                paymentRepository.setStatus(payment, PaymentStatus.REJECTED.getValue()
+        ));
+    }
 }
