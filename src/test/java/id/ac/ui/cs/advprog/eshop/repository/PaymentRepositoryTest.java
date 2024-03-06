@@ -139,7 +139,7 @@ public class PaymentRepositoryTest {
         Payment payment = paymentRepository.findById(payments.getFirst().getId());
 
         assertThrows(IllegalArgumentException.class, () ->
-                paymentRepository.setStatus(payment, PaymentStatus.REJECTED.getValue()
-        ));
+                paymentRepository.setStatus(payment, "MEONG")
+        );
     }
 }
