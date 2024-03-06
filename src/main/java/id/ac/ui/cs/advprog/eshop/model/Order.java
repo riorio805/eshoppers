@@ -6,7 +6,6 @@ import lombok.Getter;
 
 import java.util.List;
 
-@Builder
 @Getter
 public class Order {
     String id;
@@ -42,8 +41,6 @@ public class Order {
     }
 
     public Order updateOrder(Order order) {
-        assert this.getId().equals(order.getId());
-
         this.products = order.getProducts();
         this.orderTime = order.getOrderTime();
         this.author = order.getAuthor();
